@@ -1,0 +1,23 @@
+@import '../node_modules/normalize.css';
+@import './fonts.scss';
+
+html,
+body,
+#root {
+	height: 100%;
+}
+
+body {
+	font-family: 'HelveticaNeue', Helvetica, Arial, sans-serif;
+	line-height: 1.2;
+	font-size: 16px;
+	color: #000000;
+}
+
+h1 {
+	font-size: 35px;
+}
+
+small {
+	font-size: 13px;
+}

@@ -1,0 +1,22 @@
+$font-path: './fonts/';
+$font-src-helvetica: (
+	regular: $font-path + 'HelveticaNeue.woff',
+	regular2: $font-path + 'HelveticaNeue.woff2',
+	bold: $font-path + 'HelveticaNeue-bold.woff',
+	bold2: $font-path + 'HelveticaNeue-bold.woff2',
+);
+
+@font-face {
+	font-family: 'HelveticaNeue';
+	font-style: normal;
+	font-weight: 400;
+	src: local('HelveticaNeue Regular'), local('HelveticaNeue-Regular'), url(map-get($font-src-helvetica, regular2)) format('woff2'),
+		url(map-get($font-src-helvetica, regular)) format('woff');
+}
+
+@font-face {
+	font-family: 'HelveticaNeue';
+	font-style: bold;
+	font-weight: 700;
+	src: local('HelveticaNeue Bold'), local('HelveticaNeue-Bold'), url(map-get($font-src-helvetica, bold2)) format('woff2'), url(map-get($font-src-helvetica, bold)) format('woff');
+}
