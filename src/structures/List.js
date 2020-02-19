@@ -35,22 +35,18 @@ class List {
 		}
 	}
 
-	forEach(func) {
-		let pointer = this.first;
-		let index = 0;
-		while (pointer !== null) {
-			func(pointer.data, index);
-			pointer = pointer.next;
-			index++;
-		}
-	}
-
 	getAll() {
 		const result = [];
-		this.forEach(item => {
-			result.push(item);
-		});
+		let pointer = this.first;
+		while (pointer !== null) {
+			result.push(pointer.data);
+			pointer = pointer.next;
+		}
 		return result;
+	}
+
+	forEach(func) {
+		this.getAll().forEach((item, index) => func(item, index));
 	}
 
 	map(func) {

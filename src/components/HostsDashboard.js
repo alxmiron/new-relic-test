@@ -1,56 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import App from '../model/App';
+import Apps from '../model/Apps';
+import Hosts from '../model/Hosts';
+import hostsProvider from '../HOC/hostsProvider';
+import appsProvider from '../HOC/appsProvider';
+import { isDev } from '../constants';
 import Checkbox from './Checkbox';
 import HostCard from './HostCard';
 import './HostsDashboard.scss';
 
-const apps = [
-	{
-		id: '1',
-		name: 'Small Fresh Pants - Kautzer - Boyer, and Sons',
-		contributors: ['Edwin Reinger', 'Ofelia Dickens', 'Hilbert Cole', 'Helen Kuphal', 'Maurine McDermott Sr.'],
-		version: 7,
-		apdex: 68,
-	},
-	{
-		id: '2',
-		name: 'Refined Concrete Shirt - Hudson - Sauer, Group',
-		contributors: ['Ramon Harris DDS', 'Summer Dicki', 'Triston Sipes', 'Fae Lind', 'Carole Emard'],
-		version: 6,
-		apdex: 57,
-	},
-	{
-		id: '3',
-		name: 'Ergonomic Wooden Soap - Lemke and Sons, Inc',
-		contributors: ['Miss Moises Walter', 'Caroline Murazik'],
-		version: 2,
-		apdex: 61,
-	},
-	{
-		id: '4',
-		name: 'Small Fresh Pants - Kautzer - Boyer, and Sons',
-		contributors: ['Edwin Reinger', 'Ofelia Dickens', 'Hilbert Cole', 'Helen Kuphal', 'Maurine McDermott Sr.'],
-		version: 7,
-		apdex: 68,
-	},
-	{
-		id: '5',
-		name: 'Refined Concrete Shirt - Hudson - Sauer, Group',
-		contributors: ['Ramon Harris DDS', 'Summer Dicki', 'Triston Sipes', 'Fae Lind', 'Carole Emard'],
-		version: 6,
-		apdex: 57,
-	},
-	{
-		id: '6',
-		name: 'Ergonomic Wooden Soap - Lemke and Sons, Inc',
-		contributors: ['Miss Moises Walter', 'Caroline Murazik'],
-		version: 2,
-		apdex: 61,
-	},
-];
-
 const HostsDashboard = props => {
 	const [listMode, setListMode] = React.useState(false);
+	const [hosts, setHosts] = React.useState([]);
+	React.useEffect(() => {
+		const subscriptionId = 'hosts-update';
+
+		if (isDev) {
+			window.apps = props.apps;
+			window.hosts = props.hosts;
+		}
+
+		fetch('/host-app-data.json')
+			.then(res => res.json())
+			.then(appsList => {
+				appsList.forEach((appData, index) => {
+					const appId = `${index + 1}`;
+					const app = new App(appId, appData);
+					props.apps.add(app);
+					props.hosts.addAppToHosts(app);
+				});
+
+				setHosts(props.hosts.getAll());
+				props.hosts.subscribe(subscriptionId, setHosts);
+			});
+
+		return () => props.hosts.unsubscribe(subscriptionId);
+	}, [props.apps, props.hosts]);
+
+	if (isDev) console.log('- render HostsDashboard');
 	return (
 		<div className="hosts-dashboard">
 			<header>
@@ -61,22 +49,23 @@ const HostsDashboard = props => {
 				</Checkbox>
 			</header>
 			<ul className="hosts-dashboard--list">
-				{props.hosts.map(host => (
-					<HostCard id={host} key={host} apps={apps} />
+				{hosts.map(host => (
+					<HostCard key={host.id} id={host.id} host={host} />
 				))}
 			</ul>
 		</div>
 	);
 };
 
-const { string, arrayOf } = PropTypes;
+const { string, instanceOf } = PropTypes;
 HostsDashboard.propTypes = {
 	userEmail: string,
-	hosts: arrayOf(string).isRequired,
+	apps: instanceOf(Apps).isRequired,
+	hosts: instanceOf(Hosts).isRequired,
 };
 
 HostsDashboard.defaultProps = {
 	userEmail: 'averylongemailaddress@companyname.com',
 };
 
-export default HostsDashboard;
+export default appsProvider(hostsProvider(HostsDashboard));
