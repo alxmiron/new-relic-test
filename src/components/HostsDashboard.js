@@ -26,6 +26,27 @@ const sites = [
 		version: 2,
 		apdex: 61,
 	},
+	{
+		id: '4',
+		name: 'Small Fresh Pants - Kautzer - Boyer, and Sons',
+		contributors: ['Edwin Reinger', 'Ofelia Dickens', 'Hilbert Cole', 'Helen Kuphal', 'Maurine McDermott Sr.'],
+		version: 7,
+		apdex: 68,
+	},
+	{
+		id: '5',
+		name: 'Refined Concrete Shirt - Hudson - Sauer, Group',
+		contributors: ['Ramon Harris DDS', 'Summer Dicki', 'Triston Sipes', 'Fae Lind', 'Carole Emard'],
+		version: 6,
+		apdex: 57,
+	},
+	{
+		id: '6',
+		name: 'Ergonomic Wooden Soap - Lemke and Sons, Inc',
+		contributors: ['Miss Moises Walter', 'Caroline Murazik'],
+		version: 2,
+		apdex: 61,
+	},
 ];
 
 const HostsDashboard = props => {
