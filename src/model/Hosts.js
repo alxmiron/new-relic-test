@@ -3,7 +3,8 @@ import Host from './Host';
 
 class Hosts {
 	constructor(sitesList) {
-		sitesList.forEach((siteData, siteId) => {
+		sitesList.forEach((siteData, index) => {
+			const siteId = index + 1;
 			const site = new Site(siteId, siteData);
 			const siteHosts = siteData.host || [];
 			siteHosts.forEach(hostId => {
@@ -26,8 +27,8 @@ class Hosts {
 	toString() {
 		return this.getAll()
 			.map(host => {
-				const sites = Object.values(host.sites);
-				return `${host.id} (${sites.length}): ${sites.map(site => site.id).join(',')}`;
+				const sites = host.getSites();
+				return `${host.id} (${sites.length}): ${sites.map(site => `id:${site.id},apdex:${site.apdex}}`).join(', ')}`;
 			})
 			.join('\n\n');
 	}
