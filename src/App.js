@@ -1,8 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import 'whatwg-fetch';
-import './App.css';
 import Hosts from './model/Hosts';
+import HostsDashboard from './components/HostsDashboard';
+import './App.scss';
+
+const hosts = ['e7bf58af-f0be.dallas.biz', 'b0b655c5-928a.nadia.biz', '95b346a0-17f4.abbigail.name'];
 
 function App() {
 	React.useEffect(() => {
@@ -13,19 +15,7 @@ function App() {
 				console.log(hosts.toString());
 			});
 	}, []);
-	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-					Learn React
-				</a>
-			</header>
-		</div>
-	);
+	return <HostsDashboard hosts={hosts} />;
 }
 
 export default App;
