@@ -7,10 +7,10 @@ const HostCard = props => {
 		<li className="host--card">
 			<h3>{props.id}</h3>
 			<ul className="host--list">
-				{props.sites.map(site => (
-					<li key={site.id} className="host--site">
-						<small>{site.apdex}</small>
-						<span>{site.name}</span>
+				{props.apps.map(app => (
+					<li key={app.id} className="host--app">
+						<small>{app.apdex}</small>
+						<span>{app.name}</span>
 					</li>
 				))}
 			</ul>
@@ -21,7 +21,7 @@ const HostCard = props => {
 const { string, arrayOf, shape } = PropTypes;
 HostCard.propTypes = {
 	id: string.isRequired,
-	sites: arrayOf(shape({ id: string.isRequired, name: string.isRequired })).isRequired,
+	apps: arrayOf(shape({ id: string.isRequired, name: string.isRequired })).isRequired,
 };
 
 HostCard.defaultProps = {};

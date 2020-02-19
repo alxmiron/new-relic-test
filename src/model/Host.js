@@ -3,15 +3,15 @@ import LimitedSortedList from '../structures/LimitedSortedList';
 class Host {
 	constructor(id) {
 		this.id = id;
-		this.sites = new LimitedSortedList({ idProp: 'id', compareProp: 'apdex', limit: 25 });
+		this.apps = new LimitedSortedList({ idProp: 'id', compareProp: 'apdex', limit: 25 });
 	}
 
-	addSite(site) {
-		this.sites.add(site);
+	addApp(app) {
+		this.apps.add(app);
 	}
 
-	getSites() {
-		return this.sites.getAll();
+	getApps() {
+		return this.apps.getAll();
 	}
 }
 

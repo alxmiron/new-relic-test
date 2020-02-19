@@ -1,15 +1,15 @@
 import Host from './Host';
 
 class Hosts {
-	addAppToHosts(site) {
-		const siteHosts = site.host || [];
-		siteHosts.forEach(hostId => {
+	addAppToHosts(app) {
+		const appHosts = app.host || [];
+		appHosts.forEach(hostId => {
 			const existingHost = this[hostId];
 			if (existingHost) {
-				existingHost.addSite(site);
+				existingHost.addApp(app);
 			} else {
 				const host = new Host(hostId);
-				host.addSite(site);
+				host.addApp(app);
 				this[host.id] = host;
 			}
 		});
@@ -23,8 +23,8 @@ class Hosts {
 	toString() {
 		return this.getAll()
 			.map(host => {
-				const sites = host.getSites();
-				return `${host.id} (${sites.length}): ${sites.map(site => `id:${site.id},apdex:${site.apdex}}`).join(', ')}`;
+				const apps = host.getApps();
+				return `${host.id} (${apps.length}): ${apps.map(app => `id:${app.id},apdex:${app.apdex}}`).join(', ')}`;
 			})
 			.join('\n\n');
 	}

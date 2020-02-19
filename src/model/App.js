@@ -1,4 +1,4 @@
-class Site {
+class App {
 	constructor(id, props) {
 		this.id = id;
 		this.name = props.name;
@@ -9,4 +9,4 @@ class Site {
 	}
 }
 
-export default Site;
+export default App;

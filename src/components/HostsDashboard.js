@@ -4,7 +4,7 @@ import Checkbox from './Checkbox';
 import HostCard from './HostCard';
 import './HostsDashboard.scss';
 
-const sites = [
+const apps = [
 	{
 		id: '1',
 		name: 'Small Fresh Pants - Kautzer - Boyer, and Sons',
@@ -62,7 +62,7 @@ const HostsDashboard = props => {
 			</header>
 			<ul className="hosts-dashboard--list">
 				{props.hosts.map(host => (
-					<HostCard id={host} key={host} sites={sites} />
+					<HostCard id={host} key={host} apps={apps} />
 				))}
 			</ul>
 		</div>
