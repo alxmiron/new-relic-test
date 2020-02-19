@@ -19,6 +19,12 @@ class Hosts {
 		return Object.values(this);
 	}
 
+	getTopAppsByHost(hostId) {
+		const host = this[hostId];
+		if (!host) return undefined;
+		return host.getApps();
+	}
+
 	// For debugging:
 	toString() {
 		return this.getAll()
