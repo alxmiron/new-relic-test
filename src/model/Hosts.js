@@ -15,6 +15,10 @@ class Hosts {
 		});
 	}
 
+	get(hostId) {
+		return this[hostId];
+	}
+
 	getAll() {
 		return Object.values(this);
 	}
@@ -23,6 +27,16 @@ class Hosts {
 		const host = this[hostId];
 		if (!host) return undefined;
 		return host.getApps();
+	}
+
+	removeAppFromHosts(app) {
+		const appId = app.id;
+		const appHosts = app.host || [];
+		appHosts.forEach(hostId => {
+			const host = this.get(hostId);
+			if (!host) return;
+			host.removeApp(appId);
+		});
 	}
 
 	// For debugging:

@@ -1,14 +1,18 @@
 class Apps {
+	get(appId) {
+		return this[appId];
+	}
+
+	getAll() {
+		return Object.values(this);
+	}
+
 	add(app) {
 		this[app.id] = app;
 	}
 
 	remove(appId) {
 		delete this[appId];
-	}
-
-	getAll() {
-		return Object.values(this);
 	}
 
 	// For debugging:

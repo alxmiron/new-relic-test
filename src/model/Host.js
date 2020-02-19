@@ -6,12 +6,16 @@ class Host {
 		this.apps = new LimitedSortedList({ idProp: 'id', compareProp: 'apdex', limit: 25 });
 	}
 
+	getApps() {
+		return this.apps.getAll();
+	}
+
 	addApp(app) {
 		this.apps.add(app);
 	}
 
-	getApps() {
-		return this.apps.getAll();
+	removeApp(appId) {
+		this.apps.remove(appId);
 	}
 }
 
