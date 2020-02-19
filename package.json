@@ -11,11 +11,15 @@
     "react-scripts": "3.4.0",
     "whatwg-fetch": "^3.0.0"
   },
+  "devDependencies": {
+    "prettier": "1.19.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier:fix": "prettier --config .prettierrc.json --write '**/*.{js,scss}'"
   },
   "eslintConfig": {
     "extends": "react-app"
