@@ -1,22 +1,17 @@
-import Site from './Site';
 import Host from './Host';
 
 class Hosts {
-	constructor(sitesList) {
-		sitesList.forEach((siteData, index) => {
-			const siteId = index + 1;
-			const site = new Site(siteId, siteData);
-			const siteHosts = siteData.host || [];
-			siteHosts.forEach(hostId => {
-				const existingHost = this[hostId];
-				if (existingHost) {
-					existingHost.addSite(site);
-				} else {
-					const host = new Host(hostId);
-					host.addSite(site);
-					this[host.id] = host;
-				}
-			});
+	addAppToHosts(site) {
+		const siteHosts = site.host || [];
+		siteHosts.forEach(hostId => {
+			const existingHost = this[hostId];
+			if (existingHost) {
+				existingHost.addSite(site);
+			} else {
+				const host = new Host(hostId);
+				host.addSite(site);
+				this[host.id] = host;
+			}
 		});
 	}
 
@@ -24,6 +19,7 @@ class Hosts {
 		return Object.values(this);
 	}
 
+	// For debugging:
 	toString() {
 		return this.getAll()
 			.map(host => {

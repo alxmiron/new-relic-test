@@ -1,5 +1,7 @@
 import React from 'react';
 import 'whatwg-fetch';
+import Site from './model/Site';
+import Sites from './model/Sites';
 import Hosts from './model/Hosts';
 import HostsDashboard from './components/HostsDashboard';
 import './App.scss';
@@ -10,9 +12,19 @@ function App() {
 	React.useEffect(() => {
 		fetch('http://localhost:3000/host-app-data.json')
 			.then(res => res.json())
-			.then(sitesData => {
-				const hosts = new Hosts(sitesData);
-				console.log(hosts.toString());
+			.then(sitesList => {
+				const sites = new Sites();
+				const hosts = new Hosts();
+
+				sitesList.forEach((siteData, index) => {
+					const siteId = `${index + 1}`;
+					const site = new Site(siteId, siteData);
+					sites.add(site);
+					hosts.addAppToHosts(site);
+				});
+
+				// console.log(sites.toString());
+				// console.log(hosts.toString());
 			});
 	}, []);
 	return <HostsDashboard hosts={hosts} />;

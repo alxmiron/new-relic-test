@@ -5,6 +5,7 @@ class Site {
 		this.contributors = props.contributors;
 		this.apdex = props.apdex;
 		this.version = props.version;
+		this.host = props.host;
 	}
 }
 
