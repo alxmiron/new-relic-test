@@ -1,10 +1,9 @@
 import React from 'react';
 import 'whatwg-fetch';
 import HostsDashboard from './components/HostsDashboard';
-import './App.scss';
 
-function MyApp() {
+const MyApp = () => {
 	return <HostsDashboard />;
-}
+};
 
 export default MyApp;
