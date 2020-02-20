@@ -1,9 +1,9 @@
 import LimitedSortedList from '../structures/LimitedSortedList';
 
 class Host {
-	constructor(id) {
+	constructor(id, { sortedLimit = 25 } = {}) {
 		this.id = id;
-		this.apps = new LimitedSortedList({ idProp: 'id', compareProp: 'apdex', limit: 25 });
+		this.apps = new LimitedSortedList({ idProp: 'id', compareProp: 'apdex', limit: sortedLimit });
 		this.subscriptions = {};
 	}
 
@@ -22,7 +22,7 @@ class Host {
 	}
 
 	isEmpty() {
-		return this.length === 0;
+		return this.apps.length === 0;
 	}
 
 	subscribe(subscriptionId, listener) {

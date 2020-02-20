@@ -1,9 +1,10 @@
 import Host from './Host';
 
 class Hosts {
-	constructor() {
+	constructor({ sortedLimit = 25 } = {}) {
 		this.hash = {};
 		this.subscriptions = {};
+		this.sortedLimit = sortedLimit;
 	}
 
 	get(hostId) {
@@ -16,25 +17,28 @@ class Hosts {
 
 	getTopAppsByHost(hostId) {
 		const host = this.hash[hostId];
-		if (!host) return undefined;
+		if (!host) return [];
 		return host.getApps();
 	}
 
 	addAppToHosts(app) {
+		const prevLength = Object.keys(this.hash).length;
 		app.host.forEach(hostId => {
 			const existingHost = this.hash[hostId];
 			if (existingHost) {
 				existingHost.addApp(app);
 			} else {
-				const host = new Host(hostId);
+				const host = new Host(hostId, { sortedLimit: this.sortedLimit });
 				host.addApp(app);
 				this.hash[host.id] = host;
-				this.emitUpdateEvent();
 			}
 		});
+		const newLength = Object.keys(this.hash).length;
+		if (prevLength !== newLength) this.emitUpdateEvent();
 	}
 
 	removeAppFromHosts(app) {
+		const prevLength = Object.keys(this.hash).length;
 		const appId = app.id;
 		app.host.forEach(hostId => {
 			const host = this.get(hostId);
@@ -42,9 +46,10 @@ class Hosts {
 			host.removeApp(appId);
 			if (host.isEmpty()) {
 				delete this.hash[hostId];
-				this.emitUpdateEvent();
 			}
 		});
+		const newLength = Object.keys(this.hash).length;
+		if (prevLength !== newLength) this.emitUpdateEvent();
 	}
 
 	subscribe(subscriptionId, listener) {

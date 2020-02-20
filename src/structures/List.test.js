@@ -3,7 +3,7 @@ import List from './List';
 describe('List structure', () => {
 	it('should create empty list on init', () => {
 		const list = new List();
-		expect(list.length).toBe(0);
+		expect(list).toHaveLength(0);
 		expect(list.getAll()).toEqual([]);
 	});
 
@@ -13,9 +13,9 @@ describe('List structure', () => {
 		const newItemB = { id: 2 };
 		list.add(newItemA);
 		list.add(newItemB);
-		expect(list.length).toBe(2);
+		expect(list).toHaveLength(2);
 		const items = list.getAll();
-		expect(items.length).toBe(2);
+		expect(items).toHaveLength(2);
 		expect(items[0]).toBe(newItemA);
 		expect(items[1]).toBe(newItemB);
 	});
@@ -27,9 +27,9 @@ describe('List structure', () => {
 		list.add(newItemA);
 		list.add(newItemB);
 		list.removeLast();
-		expect(list.length).toBe(1);
+		expect(list).toHaveLength(1);
 		const items = list.getAll();
-		expect(items.length).toBe(1);
+		expect(items).toHaveLength(1);
 		expect(items[0]).toBe(newItemA);
 	});
 
@@ -84,7 +84,7 @@ describe('List structure', () => {
 		expect(targetNode.data).toBe(newItemB);
 
 		list.removeNode(targetNode);
-		expect(list.length).toBe(2);
+		expect(list).toHaveLength(2);
 		expect(list.getAll()).toEqual([newItemA, newItemC]);
 	});
 });
