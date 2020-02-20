@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import App from '../model/App';
 import Apps from '../model/Apps';
 import Hosts from '../model/Hosts';
@@ -48,7 +49,7 @@ const HostsDashboard = props => {
 					{listMode ? <span>Show as an awesome grid</span> : <span>Show as list</span>}
 				</Checkbox>
 			</header>
-			<ul className="hosts-dashboard--list">
+			<ul className={classNames('hosts-dashboard--list', listMode ? 'hosts-dashboard--list-list' : 'hosts-dashboard--list-grid')}>
 				{hosts.map(host => (
 					<HostCard key={host.id} id={host.id} host={host} />
 				))}

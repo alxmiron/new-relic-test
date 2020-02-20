@@ -36,4 +36,4 @@ HostCard.propTypes = {
 
 HostCard.defaultProps = {};
 
-export default HostCard;
+export default React.memo(HostCard);

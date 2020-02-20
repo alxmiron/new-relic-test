@@ -33,11 +33,20 @@
 	margin: 0;
 	list-style: none;
 
-	> li {
-		margin-bottom: 30px;
+	&-list {
+		> li {
+			margin-bottom: 30px;
 
-		&:last-child {
-			margin-bottom: 0;
+			&:last-child {
+				margin-bottom: 0;
+			}
 		}
+	}
+
+	&-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 30px 30px;
+		place-items: start;
 	}
 }
