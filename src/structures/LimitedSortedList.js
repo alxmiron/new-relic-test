@@ -52,10 +52,10 @@ class LimitedSortedList extends SortedList {
 
 	getMaxFromUnsortedHeap() {
 		const compareProp = this.compareProp;
-		return Object.values(this.unsortedHeap).reduce((currMax, itemData) => {
-			if (currMax === undefined) return itemData;
-			if (itemData[compareProp] > currMax) return itemData;
-			return currMax;
+		return Object.values(this.unsortedHeap).reduce((maxItemData, itemData) => {
+			if (maxItemData === undefined) return itemData;
+			if (itemData[compareProp] > maxItemData[compareProp]) return itemData;
+			return maxItemData;
 		}, undefined);
 	}
 }
