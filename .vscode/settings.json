@@ -2,6 +2,7 @@
     "editor.formatOnSave": true,
     "editor.insertSpaces": false,
     "cSpell.words": [
-        "apdex"
+        "apdex",
+        "checkmark"
     ]
 }

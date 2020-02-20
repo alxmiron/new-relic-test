@@ -51,7 +51,7 @@ const HostsDashboard = props => {
 			</header>
 			<ul className={classNames('hosts-dashboard--list', listMode ? 'hosts-dashboard--list-list' : 'hosts-dashboard--list-grid')}>
 				{hosts.map(host => (
-					<HostCard key={host.id} id={host.id} host={host} />
+					<HostCard key={host.id} id={host.id} hosts={props.hosts} />
 				))}
 			</ul>
 		</div>

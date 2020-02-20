@@ -7,6 +7,7 @@ const Checkbox = props => {
 	return (
 		<label className={classNames('checkbox--label', props.className)}>
 			<input type="checkbox" value={props.value} onChange={e => props.onChange(e.target.checked)} />
+			<span className="checkbox--checkmark" />
 			{props.children}
 		</label>
 	);
