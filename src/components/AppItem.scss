@@ -1,0 +1,49 @@
+.appItem {
+	margin-bottom: 10px;
+	padding: 5px;
+	display: flex;
+	cursor: default;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	&:hover {
+		background: rgba(167, 182, 194, 0.2);
+
+		.appItem--remove {
+			opacity: 0.62;
+		}
+	}
+
+	> small {
+		flex: 0 0 auto;
+		width: 30px;
+		font-weight: bold;
+		opacity: 0.62;
+		padding-top: 2px;
+	}
+}
+
+.appItem--name {
+	flex: 1 1 auto;
+}
+
+.appItem--remove {
+	flex: 0 0 auto;
+	width: 20px;
+	height: 20px;
+	padding: 2px;
+	margin: 0 0 0 10px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	opacity: 0;
+	outline: none;
+	border-radius: 3px;
+	color: #4a4a4a;
+
+	&:active {
+		background: rgba(115, 134, 148, 0.3);
+	}
+}

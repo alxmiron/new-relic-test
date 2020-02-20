@@ -12,22 +12,5 @@
 .host--list {
 	list-style: none;
 	padding: 0;
-	margin: 0;
-}
-
-.host--app {
-	margin-bottom: 15px;
-	display: flex;
-
-	&:last-child {
-		margin-bottom: 0;
-	}
-
-	> small {
-		flex: 0 0 auto;
-		width: 30px;
-		font-weight: bold;
-		opacity: 0.62;
-		padding-top: 2px;
-	}
+	margin: -5px;
 }
