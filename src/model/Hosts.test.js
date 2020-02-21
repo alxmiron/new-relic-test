@@ -5,7 +5,6 @@ import Hosts from './Hosts';
 describe('Hosts model', () => {
 	const appsData = [
 		{
-			id: '1',
 			name: 'Ergonomic Plastic Hat - Kuhn LLC, Inc',
 			contributors: ['Leopoldo Lakin', 'Alta Kuphal', 'Meagan Durgan', 'Tyrique Paucek', 'Natalie Pfannerstill'],
 			version: 9,
@@ -13,7 +12,6 @@ describe('Hosts model', () => {
 			host: ['b0b655c5-928a.nadia.biz', '95b346a0-17f4.abbigail.name'],
 		},
 		{
-			id: '2',
 			name: 'Incredible Rubber Computer - Glover, Christiansen and Hartmann, and Sons',
 			contributors: ['Manuela Lind', 'Maddison Durgan IV', 'Eda Jaskolski'],
 			version: 3,
@@ -21,7 +19,6 @@ describe('Hosts model', () => {
 			host: ['95b346a0-17f4.abbigail.name', '9a450527-cdd9.kareem.info', 'e7bf58af-f0be.dallas.biz', '92116865-5462.conor.com'],
 		},
 		{
-			id: '3',
 			name: 'Intelligent Rubber Mouse - Herzog - Morissette, Inc',
 			contributors: ['Eliane Welch', 'Lavonne Little'],
 			version: 9,
@@ -29,7 +26,6 @@ describe('Hosts model', () => {
 			host: ['e0419f48-6a5a.craig.info', '9a450527-cdd9.kareem.info', '128406fc-0d3f.tiana.biz', '95b346a0-17f4.abbigail.name', '7e6272f7-098e.dakota.biz'],
 		},
 		{
-			id: '4',
 			name: 'Refined Rubber Gloves - Kuhlman, Beer and Fritsch, Group',
 			contributors: ['Scotty Marks', 'Blair Howe', 'Hershel Brown Sr.', 'Marcia Ebert'],
 			version: 2,
@@ -45,8 +41,8 @@ describe('Hosts model', () => {
 
 	it('should create hosts and save app in them on addAppToHosts()', () => {
 		const hosts = new Hosts();
-		const appA = new App(appsData[0].id, appsData[0]);
-		const appB = new App(appsData[1].id, appsData[1]);
+		const appA = new App(appsData[0]);
+		const appB = new App(appsData[1]);
 		hosts.addAppToHosts(appA);
 		hosts.addAppToHosts(appB);
 
@@ -71,8 +67,8 @@ describe('Hosts model', () => {
 
 	it('should remove host on removeAppFromHosts() if there is no more apps in host', () => {
 		const hosts = new Hosts();
-		const appA = new App(appsData[0].id, appsData[0]);
-		const appB = new App(appsData[1].id, appsData[1]);
+		const appA = new App(appsData[0]);
+		const appB = new App(appsData[1]);
 		hosts.addAppToHosts(appA);
 		hosts.addAppToHosts(appB);
 		hosts.removeAppFromHosts(appA);
@@ -87,10 +83,10 @@ describe('Hosts model', () => {
 
 	it('should always return sorted apps of particular host', () => {
 		const hosts = new Hosts({ sortedLimit: 2 });
-		const appA = new App(appsData[0].id, appsData[0]);
-		const appB = new App(appsData[1].id, appsData[1]);
-		const appC = new App(appsData[2].id, appsData[2]);
-		const appD = new App(appsData[3].id, appsData[3]);
+		const appA = new App(appsData[0]);
+		const appB = new App(appsData[1]);
+		const appC = new App(appsData[2]);
+		const appD = new App(appsData[3]);
 		hosts.addAppToHosts(appA);
 		hosts.addAppToHosts(appB);
 		hosts.addAppToHosts(appC);
@@ -119,9 +115,9 @@ describe('Hosts model', () => {
 
 	it('should emit update events on hosts changes, unsubscribe when done', () => {
 		const hosts = new Hosts();
-		const appA = new App(appsData[0].id, appsData[0]);
-		const appB = new App(appsData[1].id, appsData[1]);
-		const appC = new App(appsData[2].id, appsData[2]);
+		const appA = new App(appsData[0]);
+		const appB = new App(appsData[1]);
+		const appC = new App(appsData[2]);
 		const subscriptionId = 'updates';
 		const eventListener = jest.fn();
 		hosts.subscribe(subscriptionId, eventListener);

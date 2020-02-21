@@ -26,8 +26,7 @@ const HostsDashboard = props => {
 			.then(res => res.json())
 			.then(appsList => {
 				appsList.forEach((appData, index) => {
-					const appId = `${index + 1}`;
-					const app = new App(appId, appData);
+					const app = new App(appData, `${index + 1}`);
 					props.apps.add(app);
 					props.hosts.addAppToHosts(app);
 				});

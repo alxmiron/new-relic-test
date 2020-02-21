@@ -5,7 +5,6 @@ describe('Host model', () => {
 	const hostId = 'b0b655c5-928a.nadia.biz';
 	const appsData = [
 		{
-			id: '1',
 			name: 'Ergonomic Plastic Hat - Kuhn LLC, Inc',
 			contributors: ['Leopoldo Lakin', 'Alta Kuphal', 'Meagan Durgan', 'Tyrique Paucek', 'Natalie Pfannerstill'],
 			version: 9,
@@ -13,7 +12,6 @@ describe('Host model', () => {
 			host: ['b0b655c5-928a.nadia.biz', '95b346a0-17f4.abbigail.name'],
 		},
 		{
-			id: '2',
 			name: 'Incredible Rubber Computer - Glover, Christiansen and Hartmann, and Sons',
 			contributors: ['Manuela Lind', 'Maddison Durgan IV', 'Eda Jaskolski'],
 			version: 3,
@@ -30,7 +28,7 @@ describe('Host model', () => {
 
 	it('should add app to host apps collection', () => {
 		const host = new Host(hostId);
-		const app = new App(appsData[0].id, appsData[0]);
+		const app = new App(appsData[0]);
 		host.addApp(app);
 
 		const savedApps = host.getApps();
@@ -41,8 +39,8 @@ describe('Host model', () => {
 
 	it('should remove app from host apps collection', () => {
 		const host = new Host(hostId);
-		const appA = new App(appsData[0].id, appsData[0]);
-		const appB = new App(appsData[1].id, appsData[1]);
+		const appA = new App(appsData[0]);
+		const appB = new App(appsData[1]);
 		host.addApp(appA);
 		host.addApp(appB);
 		host.removeApp(appA.id);
@@ -55,8 +53,8 @@ describe('Host model', () => {
 
 	it('should emit update events on apps changes, unsubscribe when done', () => {
 		const host = new Host(hostId);
-		const appA = new App(appsData[0].id, appsData[0]);
-		const appB = new App(appsData[1].id, appsData[1]);
+		const appA = new App(appsData[0]);
+		const appB = new App(appsData[1]);
 		const subscriptionId = 'updates';
 		const eventListener = jest.fn();
 		host.subscribe(subscriptionId, eventListener);
