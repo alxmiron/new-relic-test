@@ -1,12 +1,24 @@
 import ListNode from './ListNode';
 
+/**
+ * Classic two-way linked list
+ */
 class List {
+	/**
+	 * List instance constructor
+	 */
 	constructor() {
 		this.first = null;
 		this.last = null;
 		this.length = 0;
 	}
 
+	/**
+	 * Add item to the end of the list
+	 * Time complexity: O(1)
+	 * @param {<T>} itemData
+	 * @return {Void}
+	 */
 	add(itemData) {
 		const newNode = new ListNode(itemData);
 		if (!this.first) this.first = newNode;
@@ -21,6 +33,11 @@ class List {
 		this.length++;
 	}
 
+	/**
+	 * Remove last item in the list
+	 * Time complexity: O(1)
+	 * @return {Void}
+	 */
 	removeLast() {
 		if (this.last) {
 			const newLast = this.last.prev;
@@ -35,6 +52,11 @@ class List {
 		}
 	}
 
+	/**
+	 * Return all items of the list
+	 * Time complexity: O(n)
+	 * @return {<T>[]} items
+	 */
 	getAll() {
 		const result = [];
 		let pointer = this.first;
@@ -45,14 +67,33 @@ class List {
 		return result;
 	}
 
+	/**
+	 * Call func on each item of the list
+	 * Time complexity: O(n)
+	 * @param {Function} func
+	 * @return {Void}
+	 */
 	forEach(func) {
 		this.getAll().forEach((item, index) => func(item, index));
 	}
 
+	/**
+	 * Map array of list items with func
+	 * Time complexity: O(n)
+	 * @param {Function} func
+	 * @return {*[]} mapped array
+	 */
 	map(func) {
 		return this.getAll().map((item, index) => func(item, index));
 	}
 
+	/**
+	 * Return a specific list node by func
+	 * (when func() returns true on some node - that node is returned)
+	 * Time complexity: O(n)
+	 * @param {Function} func
+	 * @return {ListNode|undefined}
+	 */
 	findNode(func) {
 		let pointer = this.first;
 		let index = 0;
@@ -64,6 +105,12 @@ class List {
 		return undefined;
 	}
 
+	/**
+	 * Remove passed node from the list
+	 * Time complexity: O(1)
+	 * @param {ListNode} itemNode
+	 * @return {Void}
+	 */
 	removeNode(itemNode) {
 		const prevNode = itemNode.prev;
 		const nextNode = itemNode.next;

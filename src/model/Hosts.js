@@ -1,26 +1,51 @@
 import Host from './Host';
 
 class Hosts {
+	/**
+	 * Hosts instance constructor
+	 * @param {Object?} options constructor options (optional)
+	 */
 	constructor({ sortedLimit = 25 } = {}) {
 		this.hash = {};
 		this.subscriptions = {};
 		this.sortedLimit = sortedLimit;
 	}
 
+	/**
+	 * Return host of specific ID
+	 * @param {String} hostId
+	 * @return {Host}
+	 */
 	get(hostId) {
 		return this.hash[hostId];
 	}
 
+	/**
+	 * Return all hosts
+	 * @return {Host[]}
+	 */
 	getAll() {
 		return Object.values(this.hash);
 	}
 
+	/**
+	 * Return sortedLimit amount of apps by specific host
+	 * Time complexity: see Host.getApps()
+	 * @param {String} hostId
+	 * @return {App[]}
+	 */
 	getTopAppsByHost(hostId) {
 		const host = this.hash[hostId];
 		if (!host) return [];
 		return host.getApps();
 	}
 
+	/**
+	 * Save app in it's hosts
+	 * Time complexity: see Host.addApp()
+	 * @param {App} app
+	 * @return {Void}
+	 */
 	addAppToHosts(app) {
 		const prevLength = Object.keys(this.hash).length;
 		app.host.forEach(hostId => {
@@ -37,6 +62,12 @@ class Hosts {
 		if (prevLength !== newLength) this.emitUpdateEvent();
 	}
 
+	/**
+	 * Remove app from it's hosts
+	 * Time complexity: see Host.removeApp()
+	 * @param {App} app
+	 * @return {Void}
+	 */
 	removeAppFromHosts(app) {
 		const prevLength = Object.keys(this.hash).length;
 		const appId = app.id;
