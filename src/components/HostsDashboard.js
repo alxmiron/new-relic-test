@@ -7,6 +7,7 @@ import Hosts from '../model/Hosts';
 import hostsProvider from '../HOC/hostsProvider';
 import appsProvider from '../HOC/appsProvider';
 import { isDev } from '../constants';
+import NewAppForm from './NewAppForm';
 import Checkbox from './Checkbox';
 import HostCard from './HostCard';
 import './HostsDashboard.scss';
@@ -53,6 +54,7 @@ const HostsDashboard = props => {
 					<HostCard key={host.id} id={host.id} hosts={props.hosts} />
 				))}
 			</ul>
+			<NewAppForm apps={props.apps} hosts={props.hosts} />
 		</div>
 	);
 };
